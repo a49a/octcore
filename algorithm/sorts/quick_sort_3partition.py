@@ -1,27 +1,29 @@
-
-def quick_sort_3partition(sorting, left, right):
-    if right < left:
+def quick_sort_3partition(vec, left, right):
+    if left >= right:
         return
-    cursor = i = left
-    j = right
-    pivot = sorting[left]
+    # i左边都是比pviot小的
+    # j右边都是比pviot大的
+    # cursor游标是需要和pviot比较的值
 
+    cursor = left
+    pivot = vec[left]
+    i = left
+    j = right
     while cursor <= j:
-        if sorting[cursor] < pivot:
-            sorting[cursor], sorting[i] = sorting[i], sorting[cursor]
-            cursor += 1
+        if vec[cursor] < pivot:
+            vec[cursor], vec[i] = vec[i], vec[cursor]
             i += 1
-        elif sorting[cursor] > pivot:
-            sorting[cursor], sorting[j] = sorting[j], sorting[cursor]
+            cursor += 1
+        elif vec[cursor] > pivot:
+            vec[cursor], vec[j] = vec[j], vec[cursor]
             j -= 1
         else:
             cursor += 1
 
-    quick_sort_3partition(sorting, left, i - 1)
-    quick_sort_3partition(sorting, j + 1, right)
-
+    quick_sort_3partition(vec, left, i - 1)
+    quick_sort_3partition(vec, j + 1, right)
 
 if "__main__" == __name__:
-    unsorted = [4, 3, 2]
+    unsorted = [4, 4, 4, 5, 3, 6, 2, 1]
     quick_sort_3partition(unsorted, 0, len(unsorted) - 1)
     print(unsorted)
